@@ -261,14 +261,10 @@ export default function Globe({ videos, onVideoSelect, selectedVideo }: GlobePro
   }, [selectedVideo])
 
   return (
-    <div className="fixed left-4 top-1/2 transform -translate-y-1/2 z-10">
-      <div 
-        ref={mapContainer} 
-        className="w-[400px] h-[400px] rounded-full border-4 border-white shadow-2xl overflow-hidden" 
-        style={{ clipPath: 'circle(200px)' }}
-      />
+    <div className="relative w-full h-full">
+      <div ref={mapContainer} className="w-full h-full" />
       {!process.env.NEXT_PUBLIC_MAPBOX_TOKEN && (
-        <div className="absolute inset-0 flex items-center justify-center bg-gray-100 rounded-full">
+        <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
           <div className="text-center p-8">
             <p className="text-gray-600 mb-2">Mapbox Token Required</p>
             <p className="text-sm text-gray-500">Please set NEXT_PUBLIC_MAPBOX_TOKEN in your environment</p>
