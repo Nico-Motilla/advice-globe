@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Button } from "@/components/ui/button"
 import { Globe, Grid3X3 } from "lucide-react"
 import GlobeComponent from '@/components/Globe'
-import VideoSidebar from '@/components/VideoSidebar'
+import VideoModal from '@/components/VideoModal'
 import VideoCard from '@/components/VideoCard'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -125,38 +125,41 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
       {/* Header */}
-      <div className="text-center py-8 px-8">
-        <div className="space-y-4 mb-4">
-          <p className="text-3xl font-bold text-gray-900 max-w-2xl mx-auto">
-            Discover wisdom and insights shared by people across the globe.
-          </p>
+      <div className="text-center py-6 px-8">
+        {/* Logo placeholder - you can add your logo here */}
+        <div className="mb-2">
+          <h1 className="text-2xl font-bold text-gray-900">🌍 AdviceGlobe</h1>
         </div>
         
+        <p className="text-xs text-gray-600 mb-6">
+          Discover wisdom and insights shared by people across the globe.
+        </p>
+        
         {/* Navigation Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-2">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
           <Button 
-            size="lg" 
+            size="sm" 
             onClick={() => setActiveView('map')}
-            className={`h-12 px-8 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-3 min-w-[200px] ${
+            className={`h-10 px-6 text-sm font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2 min-w-[160px] ${
               activeView === 'map' 
                 ? 'bg-blue-600 hover:bg-blue-700 text-white' 
                 : 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50'
             }`}
           >
-            <Globe className="h-6 w-6" />
+            <Globe className="h-5 w-5" />
             Map Vlog
           </Button>
           
           <Button 
-            size="lg"
+            size="sm"
             onClick={() => setActiveView('wall')}
-            className={`h-12 px-8 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center gap-3 min-w-[200px] ${
+            className={`h-10 px-6 text-sm font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center gap-2 min-w-[160px] ${
               activeView === 'wall' 
                 ? 'bg-blue-600 hover:bg-blue-700 text-white' 
                 : 'bg-white text-blue-600 border-2 border-blue-600 hover:bg-blue-50'
             }`}
           >
-            <Grid3X3 className="h-6 w-6" />
+            <Grid3X3 className="h-5 w-5" />
             Wall-Advice
           </Button>
         </div>
@@ -165,14 +168,13 @@ export default function Home() {
       {/* Main Content Container */}
       <div className="container mx-auto px-4 pb-8">
         {activeView === 'map' ? (
-          /* Map View with 65/35 Split */
-          <div className="flex gap-6 h-[calc(100vh-280px)] min-h-[600px]">
-            {/* Left side - 65% - Globe */}
-            <div className="w-[65%] bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl flex items-center justify-center p-8">
+          /* Map View - Centered Globe */
+          <div className="flex justify-center">
+            <div className="flex items-center justify-center">
               <div className="relative">
                 <div 
-                  className="w-[550px] h-[550px] rounded-full border-4 border-gray-200 shadow-xl overflow-hidden bg-white"
-                  style={{ clipPath: 'circle(275px)' }}
+                  className="w-[650px] h-[650px] rounded-full border-4 border-gray-200 shadow-xl overflow-hidden bg-white"
+                  style={{ clipPath: 'circle(325px)' }}
                 >
                   <GlobeComponent
                     videos={videos}
@@ -182,32 +184,14 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            
-            {/* Right side - 35% - Video Details */}
-            <div className="w-[35%]">
-              {selectedVideo ? (
-                <VideoSidebar
-                  video={selectedVideo}
-                  onClose={handleCloseSidebar}
-                />
-              ) : (
-                <div className="bg-white rounded-xl shadow-lg h-full flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <Globe className="h-16 w-16 text-blue-300 mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      Select a Video
-                    </h3>
-                    <p className="text-gray-600">
-                      Click on any marker on the globe to view video details here.
-                    </p>
-                    <div className="mt-4 text-sm text-gray-500">
-                      {videos.length} videos worldwide
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
+          
+          {/* Video Modal */}
+          <VideoModal
+            video={selectedVideo}
+            open={!!selectedVideo}
+            onClose={handleCloseSidebar}
+          />
         ) : (
           /* Wall View */
           <div className="bg-white rounded-xl shadow-lg">
