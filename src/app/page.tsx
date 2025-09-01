@@ -185,13 +185,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-          
-          {/* Video Modal */}
-          <VideoModal
-            video={selectedVideo}
-            open={!!selectedVideo}
-            onClose={handleCloseSidebar}
-          />
         ) : (
           /* Wall View */
           <div className="bg-white rounded-xl shadow-lg">
@@ -355,6 +348,13 @@ export default function Home() {
             </div>
           </div>
         )}
+        
+        {/* Video Modal */}
+        <VideoModal
+          video={selectedVideo}
+          open={!!selectedVideo}
+          onClose={handleCloseSidebar}
+        />
       </div>
     </div>
   );
