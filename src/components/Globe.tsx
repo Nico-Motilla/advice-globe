@@ -63,8 +63,8 @@ export default function Globe({ videos, onVideoSelect, selectedVideo }: GlobePro
         setMapLoaded(true)
       })
 
-      // Add navigation controls
-      map.current.addControl(new mapboxgl.NavigationControl())
+      // Add navigation controls to top right
+      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right')
     }
 
     return () => {

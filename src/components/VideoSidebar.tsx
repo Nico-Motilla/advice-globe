@@ -59,7 +59,7 @@ export default function VideoSidebar({ video, onClose }: VideoSidebarProps) {
   const embedUrl = getEmbedUrl(video.url, video.platform)
   const formattedDate = new Date(video.createdAt).toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric'
   })
 
@@ -117,7 +117,7 @@ export default function VideoSidebar({ video, onClose }: VideoSidebarProps) {
 
         {/* Video Details - Now Below */}
         <Card>
-          <CardHeader className="pb-3">
+          <CardHeader className="pb-2">
             <div className="flex items-center justify-between">
               <Badge className={`${getPlatformColor(video.platform)} text-white`}>
                 {video.platform.toUpperCase()}
@@ -145,12 +145,12 @@ export default function VideoSidebar({ video, onClose }: VideoSidebarProps) {
               {video.description}
             </div>
 
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs text-gray-500">
+            <div className="flex items-center justify-between text-xs text-gray-500">
+              <div className="flex items-center gap-2">
                 <MapPin className="h-3 w-3" />
                 {video.location}
               </div>
-              <div className="flex items-center gap-2 text-xs text-gray-500">
+              <div className="flex items-center gap-2">
                 <CalendarDays className="h-3 w-3" />
                 {formattedDate}
               </div>

@@ -127,13 +127,13 @@ export default function Home() {
       {/* Header */}
       <div className="text-center py-8 px-8">
         <div className="space-y-4 mb-4">
-          <p className="text-xl font-bold text-gray-900 max-w-2xl mx-auto">
+          <p className="text-3xl font-bold text-gray-900 max-w-2xl mx-auto">
             Discover wisdom and insights shared by people across the globe.
           </p>
         </div>
         
         {/* Navigation Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-4">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-2">
           <Button 
             size="lg" 
             onClick={() => setActiveView('map')}
@@ -168,11 +168,11 @@ export default function Home() {
           /* Map View with 65/35 Split */
           <div className="flex gap-6 h-[calc(100vh-280px)] min-h-[600px]">
             {/* Left side - 65% - Globe */}
-            <div className="w-[65%] bg-white rounded-xl shadow-lg flex items-center justify-center p-8">
+            <div className="w-[65%] bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl flex items-center justify-center p-8">
               <div className="relative">
                 <div 
-                  className="w-[500px] h-[500px] rounded-full border-4 border-gray-200 shadow-xl overflow-hidden bg-white"
-                  style={{ clipPath: 'circle(250px)' }}
+                  className="w-[550px] h-[550px] rounded-full border-4 border-gray-200 shadow-xl overflow-hidden bg-white"
+                  style={{ clipPath: 'circle(275px)' }}
                 >
                   <GlobeComponent
                     videos={videos}
