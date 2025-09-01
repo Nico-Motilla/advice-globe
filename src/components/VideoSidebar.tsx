@@ -78,62 +78,7 @@ export default function VideoSidebar({ video, onClose }: VideoSidebarProps) {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        <Card>
-          <CardHeader className="pb-3">
-            <div className="flex items-center justify-between">
-              <Badge className={`${getPlatformColor(video.platform)} text-white`}>
-                {video.platform.toUpperCase()}
-              </Badge>
-              <Button
-                variant="outline"
-                size="sm"
-                asChild
-              >
-                <a
-                  href={video.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2"
-                >
-                  <ExternalLink className="h-3 w-3" />
-                  Open
-                </a>
-              </Button>
-            </div>
-            <CardTitle className="text-lg leading-6">{video.title}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="text-sm text-gray-600 leading-relaxed">
-              {video.description}
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <MapPin className="h-4 w-4" />
-                {video.location}
-              </div>
-              <div className="flex items-center gap-2 text-sm text-gray-500">
-                <CalendarDays className="h-4 w-4" />
-                {formattedDate}
-              </div>
-            </div>
-
-            {video.tags.length > 0 && (
-              <div className="space-y-2">
-                <div className="text-sm font-medium text-gray-700">Tags</div>
-                <div className="flex flex-wrap gap-1">
-                  {video.tags.map((tag) => (
-                    <Badge key={tag} variant="secondary" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Video Embed */}
+        {/* Video Embed - Now First */}
         <Card>
           <CardContent className="p-0">
             {video.platform.toLowerCase() === 'youtube' ? (
@@ -164,6 +109,62 @@ export default function VideoSidebar({ video, onClose }: VideoSidebarProps) {
                       View on {video.platform}
                     </a>
                   </Button>
+                </div>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* Video Details - Now Below */}
+        <Card>
+          <CardHeader className="pb-3">
+            <div className="flex items-center justify-between">
+              <Badge className={`${getPlatformColor(video.platform)} text-white`}>
+                {video.platform.toUpperCase()}
+              </Badge>
+              <Button
+                variant="outline"
+                size="sm"
+                asChild
+              >
+                <a
+                  href={video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <ExternalLink className="h-3 w-3" />
+                  Open
+                </a>
+              </Button>
+            </div>
+            <CardTitle className="text-lg leading-6">{video.title}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="text-sm text-gray-600 leading-relaxed">
+              {video.description}
+            </div>
+
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-xs text-gray-500">
+                <MapPin className="h-3 w-3" />
+                {video.location}
+              </div>
+              <div className="flex items-center gap-2 text-xs text-gray-500">
+                <CalendarDays className="h-3 w-3" />
+                {formattedDate}
+              </div>
+            </div>
+
+            {video.tags.length > 0 && (
+              <div className="space-y-2">
+                <div className="text-xs font-medium text-gray-700">Tags</div>
+                <div className="flex flex-wrap gap-1">
+                  {video.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
                 </div>
               </div>
             )}
