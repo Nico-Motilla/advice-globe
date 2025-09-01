@@ -64,7 +64,7 @@ export default function VideoModal({ video, open, onClose }: VideoModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-[550px] w-[550px] h-[550px] p-0 overflow-hidden">
+      <DialogContent className="max-w-[750px] w-[750px] h-[550px] p-0 overflow-hidden">
         <div className="flex h-full">
           {/* Video Section - 75% */}
           <div className="flex-1 flex flex-col">

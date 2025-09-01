@@ -125,16 +125,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-50">
       {/* Header */}
-      <div className="text-center py-6 px-8">
-        {/* Logo placeholder - you can add your logo here */}
-        <div className="mb-2">
-          <h1 className="text-2xl font-bold text-gray-900">🌍 AdviceGlobe</h1>
+      <div className="flex justify-between items-start py-6 px-8">
+        <div></div>
+        <div className="text-right">
+          <p className="text-xs text-gray-600">
+            Discover wisdom and insights shared by people across the globe.
+          </p>
         </div>
-        
-        <p className="text-xs text-gray-600 mb-6">
-          Discover wisdom and insights shared by people across the globe.
-        </p>
-        
+      </div>
+      
+      {/* Navigation Section */}
+      <div className="text-center pb-6">
         {/* Navigation Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
           <Button 
@@ -163,6 +164,7 @@ export default function Home() {
             Wall-Advice
           </Button>
         </div>
+      </div>
       </div>
 
       {/* Main Content Container */}
