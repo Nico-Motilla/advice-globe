@@ -78,9 +78,15 @@ export default function Globe({ videos, onVideoSelect, selectedVideo }: GlobePro
   useEffect(() => {
     if (!map.current || !mapLoaded || !videos.length) return
 
-    // Clear existing markers and sources
+    // Clear existing layers and sources safely
+    const layersToRemove = ['videos-layer', 'clusters', 'cluster-count']
+    layersToRemove.forEach(layerId => {
+      if (map.current && map.current.getLayer(layerId)) {
+        map.current.removeLayer(layerId)
+      }
+    })
+    
     if (map.current.getSource('videos')) {
-      map.current.removeLayer('videos-layer')
       map.current.removeSource('videos')
     }
 
@@ -210,21 +216,36 @@ export default function Globe({ videos, onVideoSelect, selectedVideo }: GlobePro
     })
 
     // Change cursor on hover
-    map.current.on('mouseenter', 'clusters', () => {
+    const handleClusterMouseEnter = () => {
       if (map.current) map.current.getCanvas().style.cursor = 'pointer'
-    })
+    }
     
-    map.current.on('mouseleave', 'clusters', () => {
+    const handleClusterMouseLeave = () => {
       if (map.current) map.current.getCanvas().style.cursor = ''
-    })
+    }
     
-    map.current.on('mouseenter', 'videos-layer', () => {
+    const handleVideoMouseEnter = () => {
       if (map.current) map.current.getCanvas().style.cursor = 'pointer'
-    })
+    }
     
-    map.current.on('mouseleave', 'videos-layer', () => {
+    const handleVideoMouseLeave = () => {
       if (map.current) map.current.getCanvas().style.cursor = ''
-    })
+    }
+
+    map.current.on('mouseenter', 'clusters', handleClusterMouseEnter)
+    map.current.on('mouseleave', 'clusters', handleClusterMouseLeave)
+    map.current.on('mouseenter', 'videos-layer', handleVideoMouseEnter)
+    map.current.on('mouseleave', 'videos-layer', handleVideoMouseLeave)
+
+    // Cleanup function to remove event listeners
+    return () => {
+      if (map.current) {
+        map.current.off('mouseenter', 'clusters', handleClusterMouseEnter)
+        map.current.off('mouseleave', 'clusters', handleClusterMouseLeave)
+        map.current.off('mouseenter', 'videos-layer', handleVideoMouseEnter)
+        map.current.off('mouseleave', 'videos-layer', handleVideoMouseLeave)
+      }
+    }
 
   }, [videos, mapLoaded, onVideoSelect])
 
